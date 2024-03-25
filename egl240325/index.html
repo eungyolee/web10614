@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10614 이은교</title>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #111727;
+        color: white;
+        font-family: "Pretendard-Regular";
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      li {
+        font-size: 1.1rem;
+      }
+
+      a {
+        color: white;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .media,
+      .table,
+      .list {
+        width: 300px;
+        height: 450px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 80px;
+        border: 1px solid white;
+        border-radius: 10px;
+      }
+
+      .table {
+        display: flex;
+        flex-direction: column;
+      }
+
+      hr {
+        width: 100%;
+      }
+
+      table {
+        margin-top: 5px;
+        text-align: center;
+        width: 300px;
+      }
+
+      tr {
+        height: 30px;
+      }
+
+      video,
+      iframe {
+        width: 100%;
+        height: 150px;
+      }
+
+      iframe {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="media">
+      <h1 style="margin: 0px">미디어 삽입 실습</h1>
+      <hr />
+      <audio src="./files/풍년.mp3" alt="집 가고 싶다" controls></audio>
+      <video src="./files/elemental.mp4" controls></video>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/mgYof19wE-4?si=rAISqfMng-4vfM35"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="table">
+      <h1 id="left">테이블 연습</h1>
+      <hr />
+      <table border="1">
+        <tr>
+          <td>국어</td>
+          <td>수학</td>
+          <td>영어</td>
+          <td>사회</td>
+          <td>과학</td>
+        </tr>
+        <tr>
+          <td>90</td>
+          <td>84</td>
+          <td colspan="3">87</td>
+        </tr>
+        <tr>
+          <td>점심시간</td>
+          <td colspan="4">맛있게 먹자</td>
+        </tr>
+        <tr>
+          <td rowspan="2">5~6교시</td>
+          <td colspan="4">자습시간</td>
+        </tr>
+        <tr>
+          <td colspan="4">귀가</td>
+        </tr>
+      </table>
+      <table border="1">
+        <tr>
+          <td colspan="5">시간표</td>
+        </tr>
+        <tr>
+          <td>mon</td>
+          <td>fri</td>
+          <td>wed</td>
+          <td>thu</td>
+          <td>fri</td>
+        </tr>
+        <tr>
+          <td>국어</td>
+          <td>수학</td>
+          <td>영어</td>
+          <td>과학</td>
+          <td rowspan="3">휴강</td>
+        </tr>
+        <tr>
+          <td colspan="4">점심시간</td>
+        </tr>
+        <tr>
+          <td>국어</td>
+          <td>수학</td>
+          <td>영어</td>
+          <td>과학</td>
+        </tr>
+      </table>
+    </div>
+    <div class="list">
+      <h1>리스트 연습</h1>
+      <ol start="4">
+        <div style="background-color: #000000">
+          합격자 명단
+          <li id="top"><a href="#bottom">맨 아래로</a></li>
+          <li>
+            <span style="background-color: white; color: #000000">김선린</span>
+          </li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </div>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li id="bottom"><a href="#top">맨 위로</a></li>
+      </ol>
+    </div>
+  </body>
+</html>
