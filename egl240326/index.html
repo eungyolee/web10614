@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10614 이은교 - 선린마블</title>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      body {
+        background-color: #191919;
+        color: white;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Pretendard-Regular";
+      }
+
+      .table {
+        width: 800px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      td {
+        font-size: 1.5rem;
+        width: 119px;
+        height: 119px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table">
+      <h1>부루마블 만들기 - table 활용</h1>
+      <table border="1" width="500" height="500">
+        <tr>
+          <td>
+            <br />
+            출발 <br />
+            →
+          </td>
+          <td>자소서 작성</td>
+          <td>원서 작성</td>
+          <td>
+            <br />
+            원서 제출 <br />
+            ↓
+          </td>
+        </tr>
+        <tr>
+          <td>전공 공부</td>
+          <td
+            rowspan="2"
+            colspan="2"
+            style="background-color: white; color: #000000"
+          >
+            <div class="dice" style="margin-bottom: 10px">
+              주사위를 굴려주세요.
+            </div>
+            <button onclick="dice()" style="padding: 10px; margin-top: 10px">
+              주사위 굴리기
+            </button>
+          </td>
+          <td>면접</td>
+        </tr>
+        <tr>
+          <td>시험</td>
+          <td>합격 발표</td>
+        </tr>
+        <tr>
+          <td>
+            <br />
+            입학<br />
+            ↑
+          </td>
+          <td>반 배치고사</td>
+          <td>신입생 교육</td>
+          <td>
+            <br />
+            신입생 OT<br />
+            ←
+          </td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      const diceResult = document.querySelector(".dice");
+      function dice() {
+        let result = (Math.floor(10 * Math.random()) % 6) + 1;
+        diceResult.innerHTML = `숫자 : ${result}`;
+      }
+    </script>
+  </body>
+</html>
