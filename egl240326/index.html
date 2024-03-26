@@ -48,21 +48,21 @@
       <h1>부루마블 만들기 - table 활용</h1>
       <table border="1" width="500" height="500">
         <tr>
-          <td>
+          <td class="0">
             <br />
             출발 <br />
             →
           </td>
-          <td>자소서 작성</td>
-          <td>원서 작성</td>
-          <td>
+          <td class="1">자소서 작성</td>
+          <td class="2">원서 작성</td>
+          <td class="3">
             <br />
             원서 제출 <br />
             ↓
           </td>
         </tr>
         <tr>
-          <td>전공 공부</td>
+          <td class="11">전공 공부</td>
           <td
             rowspan="2"
             colspan="2"
@@ -75,21 +75,21 @@
               주사위 굴리기
             </button>
           </td>
-          <td>면접</td>
+          <td class="4">면접</td>
         </tr>
         <tr>
-          <td>시험</td>
-          <td>합격 발표</td>
+          <td class="10">시험</td>
+          <td class="5">합격 발표</td>
         </tr>
         <tr>
-          <td>
+          <td class="9">
             <br />
             입학<br />
             ↑
           </td>
-          <td>반 배치고사</td>
-          <td>신입생 교육</td>
-          <td>
+          <td class="8">반 배치고사</td>
+          <td class="7">신입생 교육</td>
+          <td class="6">
             <br />
             신입생 OT<br />
             ←
@@ -99,9 +99,22 @@
     </div>
     <script>
       const diceResult = document.querySelector(".dice");
+      let prev = '0';
+      document.getElementsByClassName(`${prev}`)[0].style.backgroundColor = "white";
+      document.getElementsByClassName(`${prev}`)[0].style.color = "#000000";
       function dice() {
         let result = (Math.floor(10 * Math.random()) % 6) + 1;
         diceResult.innerHTML = `숫자 : ${result}`;
+        for (i = 0; i < result; i++) {
+          setTimeout(() => {
+            document.getElementsByClassName(`${prev}`)[0].style.backgroundColor = "#191919";
+            document.getElementsByClassName(`${prev}`)[0].style.color = "white";
+            prev = `${(parseInt(prev) + 1) % 12}`;
+            console.log(prev);
+            document.getElementsByClassName(`${prev}`)[0].style.backgroundColor = "white";
+            document.getElementsByClassName(`${prev}`)[0].style.color = "#000000";
+          }, 200);
+        }
       }
     </script>
   </body>
