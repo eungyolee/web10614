@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모의고사 클론 코딩</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h3>
+        7. 가~다에 따라 &lt;보기&gt;에 대한 언론 보도를 평가한 내용으로 적절하지
+        <u>않은</u> 것은?
+      </h3>
+      <form action="" method="post">
+        <fieldset>
+          <legend>&lt;보 기&gt;</legend>
+          <p>
+            다음은 ○○방송사의 의뢰로 △△여론조사 기관에서 세 차례 실시한 당선인
+            예측 여론조사 결과의 일부이다. (세 조사 모두 신뢰 수준 95%, 오차
+            범위 8.8%P임.)
+          </p>
+          <table border="1">
+            <tr>
+              <td colspan="2">구분</td>
+              <td>1차 조사</td>
+              <td>2차 조사</td>
+              <td>3차 조사</td>
+            </tr>
+            <tr>
+              <td colspan="2">조사일</td>
+              <td>선거일 15일 전</td>
+              <td>선거일 10일 전</td>
+              <td>선거일 5일 전</td>
+            </tr>
+            <tr>
+              <td rowspan="4">조사 결과</td>
+            </tr>
+            <tr>
+              <td>A 후보</td>
+              <td>42%</td>
+              <td>38%</td>
+              <td>39%</td>
+            </tr>
+            <tr>
+              <td>B 후보</td>
+              <td>32%</td>
+              <td>37%</td>
+              <td>38%</td>
+            </tr>
+            <tr>
+              <td>C 후보</td>
+              <td>18%</td>
+              <td>17%</td>
+              <td>17%</td>
+            </tr>
+          </table>
+        </fieldset>
+        <input type="radio" name="answer" id="one" /><label for="one"
+          >1차 조사 결과를 선거일 14일 전에 “A 후보, 10%P 이상의 차이로 B 후보와
+          C 후보에 우세”라고 보도하는 것은 나와 다 중 어느 것에도 위배되지
+          않겠군.</label
+        ><br />
+        <input type="radio" name="answer" id="two" /><label for="two"
+          >2차 조사 결과를 선거일 9일 전에 “A 후보는 B 후보에 조금 앞서고, C
+          후보는 3위”라고 보도하는 것은 나에 위배되지만, 다에 위배되지
+          않겠군.</label
+        ><br />
+        <input type="radio" name="answer" id="three" /><label for="three"
+          >3차 조사 결과를 선거일 4일 전에 “A후보는 오차 범위 내에서 1위”라고
+          보도하는 것은 가와 다에 모두 위배되겠군.</label
+        ><br />
+        <input type="radio" name="answer" id="four" /><label for="four"
+          >1차 조사 결과를 선거일 14일 전에 “A 후보 1위, B 후보 2위, C 후보
+          3위”라고 보도하는 것은 나에 위배되지 않고, 2차 조사 결과를 선거일 9일
+          전에 같은 표현으로 보도하는 것은 다에 위배되겠군.</label
+        ><br />
+        <input type="radio" name="answer" id="five" /><label for="five"
+          >2차 조사 결과를 선거일 9일 전에 “B 후보, A 후보와 오차 범위 내
+          경합”이라고 보도하는 것은 다에 위배되지 않고, 3차 조사 결과를 선거일
+          4일 전에 같은 표현으로 보도하는 것은 가에 위배되겠군.</label
+        ><br />
+      </form>
+    </div>
+  </body>
+</html>
