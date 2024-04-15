@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Brush+Script&family=Song+Myung&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #191919;
+        color: white;
+        font-family: "Pretendard-Regular";
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      hr {
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .form,
+      .font {
+        width: 30%;
+        height: 400px;
+        margin: 50px;
+        padding: 50px;
+        border: 1px solid white;
+      }
+
+      #font1 {
+        font-family: "Song Myung", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 3em;
+      }
+
+      #font2 {
+        font-family: "Black Han Sans", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 0.5em;
+      }
+
+      #font3 {
+        font-family: "Nanum Brush Script", cursive;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 0.5em;
+      }
+
+      .copyright {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 1em;
+      }
+
+      a {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1>ID, PW 입력창 스타일링</h1>
+      <hr />
+      <form action="" method="post">
+        <label for="id">아이디</label>
+        <input type="text" name="id" id="id" /><br />
+        <label for="pw">비밀번호</label>
+        <input type="password" name="pw" id="pw" /><br />
+        <label for="pw_check">비밀번호 확인</label>
+        <input type="password" name="pw_check" id="pw_check" /><br />
+      </form>
+    </div>
+    <div class="font">
+      <h1>폰트 스타일링</h1>
+      <hr />
+      <div id="font1">
+        첫번째
+        <div id="font2">
+          두번째
+          <div id="font3">세번째</div>
+        </div>
+      </div>
+    </div>
+    <h3 class="copyright">
+      Copyright 2024. <a href="https://github.com/eungyolee">이은교</a> all
+      rights reserved.
+    </h3>
+  </body>
+</html>

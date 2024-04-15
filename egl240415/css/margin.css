@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard-Regular";
+}
+
+/* 바깥 여백 설정하기 */
+article {
+  width: 50px;
+  height: 30px;
+  border: 1px solid red;
+}
+
+/* 바깥쪽 여백을 사방으로 20px만큼 설정 */
+article:nth-of-type(1) {
+  margin: 0px 300px;
+}
+/* 바깥쪽 여백을 상하는 20px 좌우는 50px만큼 설정 */
+article:nth-of-type(2) {
+  margin: 0px 249px;
+}
+/* 바깥쪽 여백을 상하는 20px 좌우는 무조건 중앙으로 설정 */
+article:nth-of-type(3) {
+  margin: 0 198px;
+}
+/* 바깥쪽 여백을 위쪽으로 20px, 좌우는 중앙, 아래쪽으로는 40px만큼 설정 */
+article:nth-of-type(4) {
+  margin: 0px 249px;
+}
+/* 바깥쪽 여백을 시계방향으로 각각 위쪽, 오른쪽, 아래쪽, 왼쪽으로 각각 설정 */
+article:nth-of-type(5) {
+  margin: 0px 300px;
+}
+/* 바깥쪽 여백을 왼쪽으로 20px만큼 설정 */
+article:nth-of-type(6) {
+  margin-top: -63px;
+  margin-left: 351px;
+}
+/* 바깥쪽 여백을 오른쪽으로 20px만큼 설정 */
+article:nth-of-type(7) {
+  margin: -63px 0px 0px 402px;
+}
+/* 바깥쪽 여백을 위쪽으로 20px만큼 설정 */
+article:nth-of-type(8) {
+  margin: -63px 0px 0px 351px;
+}
