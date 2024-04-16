@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10614 이은교</title>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+
+        background-color: #191919;
+        color: white;
+        font-family: "Pretendard-Regular";
+      }
+
+      #box1 {
+        background-color: darkblue;
+        width: 30vh;
+        height: 30vh;
+      }
+
+      #box2 {
+        background-color: crimson;
+        width: 40vh;
+        height: 40vh;
+      }
+
+      #box3 {
+        background-color: silver;
+        width: 50vh;
+        height: 50vh;
+      }
+
+      #inline1 {
+        background-color: darkred;
+      }
+
+      #inline2 {
+        background-color: green;
+      }
+
+      #inline3 {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>디스플레이 속성 연습</h1>
+    <div id="box1">
+      박스 모델입니다.
+      <div id="box2">
+        박스2
+        <div id="box3">박스3</div>
+      </div>
+    </div>
+    <span id="inline1">
+      인라인 모델입니다.
+      <span id="inline2">
+        인라인2
+        <span id="inline3">인라인3</span>
+      </span>
+    </span>
+  </body>
+</html>
