@@ -1,0 +1,103 @@
+/* 글꼴 설정 */
+@font-face {
+  font-family: abster;
+  src: url(font/abster-webfont.woff) format("woff");
+}
+
+/* 전체 선택 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/* 배경처리 */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),
+    url("./images/room.jpg");
+  display: flex;
+  justify-content: center;
+}
+
+/* 헤더배치 */
+.header {
+  width: 80%;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 글자로고 */
+.header > h1 {
+  font-family: abster;
+  color: white;
+}
+
+/* 메뉴요소 배치 */
+.nav > ul {
+  display: flex;
+  flex-direction: row;
+  min-width: 400px;
+  justify-content: space-between;
+}
+
+/* 메뉴요소 스타일링 */
+.nav > ul > li {
+  list-style-type: none;
+}
+
+/* 메뉴요소 마우스이벤트 */
+.nav > ul > li > a:hover {
+  color: yellow;
+}
+
+/* 화면 중앙 요소 배치 */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* 화면 중앙 요소 제목 */
+.hero > h2 {
+  font-size: 60px;
+  margin: 30px;
+}
+
+/* 화면 중앙 요소 본문 */
+.hero > p {
+  font-size: 22px;
+  text-align: center;
+}
+
+/* 화면 중앙 요소 버튼 */
+.hero > button {
+  padding: 15px 20px;
+  margin: 30px;
+  border-radius: 20px;
+  border: 1px solid yellow;
+  background-color: rgba(0, 0, 0, 0);
+  color: yellow;
+}
+
+/* 화면 중앙 요소 버튼 처리 */
+.hero > button:hover {
+  background-color: yellow;
+  color: black;
+  cursor: pointer;
+}
