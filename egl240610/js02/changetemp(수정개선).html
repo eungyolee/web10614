@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온도 변환기</title>
+</head>
+
+<body>
+  <table border="3">
+    <tr>
+      <td>섭씨온도</td>
+      <td>화씨온도</td>
+    </tr>
+    <script>
+      for (let i = 32; i <= 100; i += 2) {
+        document.write(`
+        <tr>
+          <td>${Math.round(((i - 32) / 1.8) * 10) / 10}</td>
+          <td>${i}</td>
+        </tr>
+      `);
+      }
+    </script>
+  </table>
+</body>
+
+</html>

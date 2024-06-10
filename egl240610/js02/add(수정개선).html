@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+</head>
+
+<body>
+  <h3>덧셈(절댓값) 계산기</h3>
+  <form action="" name="myform" method="post">
+    첫번째 정수 : <input id="x"><br />
+    두번째 정수 : <input id="y"><br />
+    합계 : <input id="sum"><br />
+    <input type="button" value="계산" onclick="calc()">
+  </form>
+
+  <script>
+    const x = document.getElementById('x');
+    const y = document.getElementById('y');
+    const sum = document.getElementById('sum');
+    function calc() {
+      let answer = parseInt(x.value) + parseInt(y.value);
+      answer = (answer < 0) ? answer * -1 : answer;
+      sum.value = answer;
+    }
+  </script>
+</body>
+
+</html>

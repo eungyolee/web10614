@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		@font-face {
+			font-family: 'Pretendard-Regular';
+			src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Pretendard-Regular';
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 1번 실습 -->
+	<button onclick="document.getElementById('lightb').src = 'light-bulb1.png'">전등켜기스위치</button>
+	<button onclick="document.getElementById('lightb').src = 'light-bulb2.png'">전등끄기스위치</button>
+	<img id="lightb" src="light-bulb2.png" style="width:120px">
+
+	<!-- 2번 실습 -->
+	<p>마우스를 이미지 위로 올리면 이미지가 커집니다.</p>
+	<img onmouseover="event.target.style.width = '200px'" onmouseout="event.target.style.width = '100px'"
+		src="https://avatars.githubusercontent.com/u/85398698?v=4" width="100px" style="display: block">
+
+	<h1 id="greeting">Nice to meet you!</h1>
+	<button onclick="changeText()">Click Me!</button>
+
+	<script>
+		// 3번 실습
+		let s = "Hello World";
+		let t = "How are you" + " today?";
+
+		document.write(s + "<br>");
+		document.write(t + "<br>");
+		document.write(s.toUpperCase() + "<br>");
+
+		// 4번 실습
+		const x = prompt("정수를 입력하세요");
+		const y = prompt("정수를 입력하세요");
+		document.write(parseInt(x) + parseInt(y));
+
+		// 5번 실습
+		function changeText() {
+			document.write("Nice to see you!");
+		}
+	</script>
+</body>
+
+</html>
