@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updown Game</title>
+</head>
+
+<body>
+  <h3>Updown Game</h3>
+  숫자 입력 : <input type="number" id="input">
+  <button id="check" onclick="check()">확인</button>
+  <p id="result"></p>
+  <p id="count"></p>
+  <script>
+    const answer = Math.floor(Math.random() * 100) + 1;
+    let count = 0;
+
+    function check() {
+      const number = document.getElementById('input').value;
+      const result = document.getElementById('result');
+      let count = 0;
+
+      count += 1;
+
+      if (parseInt(number) === answer) {
+        result.textContent = '정답입니다.';
+      } else if (number < answer) {
+        result.textContent = 'UP';
+      } else {
+        result.textContent = 'DOWN';
+      }
+
+      document.getElementById("count").textContent = `시도 횟수: ${count}`;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temp Changer</title>
+</head>
+
+<body>
+  <!-- input type range -->
+  <input type="range" id="temp" name="temp" min="-100" max="100" value="0">
+  <span id="temp-value">0</span>
+  <p id="fahreneit">화씨온도 : 32도</p>
+  <script>
+    const temp = document.getElementById('temp');
+    const tempValue = document.getElementById('temp-value');
+    const fahreneit = document.getElementById('fahreneit');
+    temp.addEventListener('input', () => {
+      tempValue.textContent = temp.value;
+      fahreneit.textContent = `화씨온도 : ${(temp.value * 1.8 + 32).toFixed(2)}도`;
+    });
+  </script>
+</body>
+
+</html>
