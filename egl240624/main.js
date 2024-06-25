@@ -4,5 +4,5 @@ function handleColorClick(event) {
   document.body.style.backgroundColor = color;  // body의 background-color를 위에서 저장한 color로 변경
 }
 
-// 색깔 버튼들을 모두 가져와서 각각에 대해 click event가 발생했을 때 handleColorClick 함수를 실행
+// 색깔 버튼들을 모두 가져와서 배열을 생성하고, 이 배열의 각 요소에 대해 click event가 발생했을 때 handleColorClick 함수를 실행
 Array.from(document.getElementsByClassName("controls_color")).forEach(color => color.addEventListener("click", handleColorClick));
