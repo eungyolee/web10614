@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>다크모드</title>
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+    * {
+      font-family: "Pretendard Variable", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>다크모드 구현하기</h1>
+  <button id="darkmode">다크모드 토글</button>
+  <script>
+    const myBtn = document.getElementById('darkmode');
+    let isDarkMode = false;
+
+    myBtn.onclick = function () {
+      if (isDarkMode) {
+        document.body.style.backgroundColor = 'white';
+        document.body.style.color = 'black';
+        isDarkMode = false;
+      } else {
+        document.body.style.backgroundColor = 'black';
+        document.body.style.color = 'white';
+        isDarkMode = true;
+      }
+    }
+  </script>
+</body>
+</html>

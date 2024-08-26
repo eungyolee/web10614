@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 변경</title>
+</head>
+<body>
+  <img src="https://github.com/nomadcoders/javascript-for-beginners/blob/master/img/0.jpeg?raw=true" alt="placeholder" id="myImg" width="800" height="600"><br />
+  <button id="changeImg">이미지 변경</button>
+  <script>
+    const images = [
+      'https://github.com/nomadcoders/javascript-for-beginners/blob/master/img/0.jpeg?raw=true',
+      'https://github.com/nomadcoders/javascript-for-beginners/blob/master/img/1.jpeg?raw=true',
+      'https://github.com/nomadcoders/javascript-for-beginners/blob/master/img/2.jpeg?raw=true'
+    ];
+    const myImg = document.getElementById('myImg');
+    const changeImg = document.getElementById('changeImg');
+
+    let currentImg = 0;
+
+    changeImg.onclick = function () {
+      currentImg = (currentImg + 1) % images.length;
+      myImg.src = images[currentImg];
+    }
+  </script>
+</body>
+</html>
