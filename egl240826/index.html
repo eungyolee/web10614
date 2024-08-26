@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form</title>
+  <style>
+    @font-face {
+      font-family: 'Pretendard-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+      background-color: black;
+      color: white;
+      font-family: 'Pretendard-Regular', sans-serif;
+    }
+
+    .form, .profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 90%;
+    }
+
+    .form {
+      width: 60%;
+    }
+
+    .profile {
+      opacity: 0;
+      width: 30%;
+    }
+
+    .select, .radio {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+
+    .select h3, .radio h3 {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1>회원가입</h1>
+    <input type="text" name="name" id="name" placeholder="이름을 입력해주세요.">
+    <textarea name="address" id="description" cols="30" rows="10" placeholder="자기소개를 입력해주세요." maxlength="200"></textarea>
+    <div class="radio">
+      <h3>동아리 선택</h3>
+      <input type="radio" name="division" value="정보보호과">정보보호과
+      <input type="radio" name="division" checked value="소프트웨어과">위대하시고 존경하는 대왕렬쌤이 이끄시는 대 소프트웨어과
+      <input type="radio" name="division" value="IT경영과">IT경영과
+      <input type="radio" name="division" value="콘텐츠디자인과">콘텐츠디자인과
+    </div>
+    <div class="select">
+      <h3>동아리 선택</h3>
+      <select id="club">
+        <option value="AnA" selected>AnA</option>
+        <option value="C,real">C,real</option>
+        <option value="TAPIE Eclair">TAPIE Eclair</option>
+        <option value="TAPIE Nective">TAPIE Nective</option>
+      </select>
+    </div>
+    <input type="submit" value="제출" onclick="submit()" id="submit">
+  </div>
+  <div class="profile">
+    <h1 id="user_name">이은교</h1>
+    <ul id="user_info">
+      <li id="user_description">안녕하세요. 이은교입니다.</li>
+      <li id="user_division">소프트웨어과</li>
+      <li id="user_club">AnA</li>
+    </ul>
+  </div>
+  <script>
+    function submit() {
+      const name = document.getElementById('name').value;
+      const description = document.getElementById('description').value;
+      const division = document.querySelector('input[name="division"]:checked').value;
+      const club = document.getElementById('club').value;
+
+      if (!name || !description || !division || !club) {
+        alert('모든 항목을 입력해주세요.');
+        return;
+      }
+
+      const user_name = document.getElementById('user_name');
+      const user_description = document.getElementById('user_description');
+      const user_division = document.getElementById('user_division');
+      const user_club = document.getElementById('user_club');
+
+      user_name.innerText = name;
+      user_description.innerText = description;
+      user_division.innerText = division;
+      user_club.innerText = club;
+
+      document.querySelector('.profile').style.opacity = 1;
+      document.getElementById('submit').value = '수정';
+    }
+  </script>
+</body>
+</html>

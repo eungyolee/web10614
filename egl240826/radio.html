@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      function getValue() {
+        const selected = document.querySelector('input[name="color"]:checked').value;
+        const result = document.getElementById('result');
+        result.value = selected;
+      }
+    </script>
+  </head>
+  <body>
+    <input type="radio" name="color" CHECKED value="red">RED<br />
+    <input type="radio" name="color" value="blue">BLUE<br />
+    <input type="radio" name="color" value="green">GREEN<br />
+    <input type="button" onClick="getValue();" value="클릭">
+    <input type="text" id="result" value="">
+  </body>
+</html>

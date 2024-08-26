@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <script>
+      function get() {
+        const checkBox = document.getElementById('myCheckBox');
+        const result = document.getElementById('result');
+        result.value = checkBox.checked ? "동의하셨습니다." : "동의하지 않으셨습니다.";
+      }
+    </script>
+  </head>
+  <body>
+    <input type="checkbox" id="myCheckBox">동의합니다.<br>
+    <input type="button" onClick="get();" value="클릭">
+    <input type="text" id="result" value="">
+  </body>
+</html>

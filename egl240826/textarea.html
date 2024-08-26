@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea id="textArea" rows=5 cols="20">This is a TextArea.</textarea>
+    <input type="button" onClick="getTextAreaValue();" value="클릭">
+    <textarea id="result" rows="5" cols="20"></textarea>
+    <script>
+      function getTextAreaValue() {
+        const textArea = document.getElementById('textArea');
+        const result = document.getElementById('result');
+        result.value = textArea.value;
+      }
+    </script>
+  </body>
+</html>
