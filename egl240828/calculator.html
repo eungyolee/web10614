@@ -136,99 +136,100 @@
   </div>
 
   <script>
-    console.log("솦과 최고 근본 동아리 AnA");
-    console.log("왕렬쌤 사랑합니다");
-    let expression = "0";
-    let firstInput = true;
-    const resultText = document.querySelector('.result');
-    function addValue(value) {
-      if (expression === "0" && firstInput) {
-        expression = "";
-        firstInput = false;
+    console.log("솦과 최고 근본 동아리 AnA");  // 진심 1
+    console.log("왕렬쌤 사랑합니다");  // 진심 2
+    let expression = "0";  // 최초 식을 0으로 설정
+    let firstInput = true;  // 첫 입력을 true로 설정
+    const resultText = document.querySelector('.result');  // 결과창을 가져옴
+    function addValue(value) {  // 입력을 받아 식에 추가하는 함수
+      if (expression === "0" && firstInput) {  // 만약 첫 입력이면
+        expression = "";  // 식 초기화
+        firstInput = false;  // 첫 입력 false
       }
-      expression += value;
-      resultText.value = expression;
+      expression += value;  // 값을 식에 추가
+      resultText.value = expression;  // 결과창에 식 표시
     }
 
-    function clearValue(value) {
-      expression = "0";
-      resultText.value = expression;
+    function clearValue(value) {  // 식을 초기화하는 함수
+      expression = "0";  // 식을 0으로 초기화
+      resultText.value = expression;  // 결과창에 식 표시
+      firstInput = true;  // 첫 입력 true
     }
 
-    function deleteValue() {
-      if (expression === "0") {
-        expression = "0";
-        firstInput = true;
+    function deleteValue() {  // 값을 삭제하는 함수
+      if (expression === "0") {  // 식이 0이면
+        expression = "0";  
+        firstInput = true;  // 첫 입력 true
       }
-      else if (expression[expression.length - 1] === " ") {
-        expression = expression.slice(0, -3);
+      else if (expression[expression.length - 1] === " ") {  // 식의 마지막이 공백이면
+        expression = expression.slice(0, -3);  // 식의 마지막 3글자 삭제
       }
       else {
-        expression = expression.slice(0, -1);
+        expression = expression.slice(0, -1);  // 식의 마지막 1글자 삭제
       }
 
-      resultText.value = expression;
+      resultText.value = expression;  // 결과창에 식 표시
     }
 
-    function calculate() {
-      let result = eval(expression);
+    function calculate() {  // 계산하는 함수
+      let result = eval(expression);  // 식을 계산
 
-      if (Number.isInteger(result)) {
-        result = result.toFixed(0);
+      if (Number.isInteger(result)) {  // 결과가 정수면
+        result = result.toFixed(0);  // 소수점 없앰
       } else {
-        result = result.toFixed(2);
+        result = result.toFixed(2);  // 소수점 2자리까지 표시
       }
 
-      resultText.value = result;
+      resultText.value = result;  // 결과창에 결과 표시
 
-      const memory = {
+      const memory = {  // 계산 기록 객체 생성
         text: expression,
         result: result
       };
 
-      let memories = window.localStorage.getItem('memories');
-      memories = memories ? JSON.parse(memories) : [];
-      memories.push(memory);
-      window.localStorage.setItem('memories', JSON.stringify(memories));
+      let memories = window.localStorage.getItem('memories');  // 로컬 스토리지 가져옴
+      memories = memories ? JSON.parse(memories) : [];  // 기존 기록이 있으면 가져오고 없으면 빈 배열 생성
+      memories.push(memory);  // 기록 추가
+      window.localStorage.setItem('memories', JSON.stringify(memories));  // 로컬 스토리지에 저장
 
-      paintMemories();
+      paintMemories();  // 기록 표시
 
-      expression = "0";
-      firstInput = true;
+      expression = "0";  // 식 초기화
+      firstInput = true;  // 첫 입력 true
     }
 
-    function paintMemories() {
-      let memories = window.localStorage.getItem('memories');
-      memories = memories ? JSON.parse(memories) : [];
-      memories = memories.reverse();
-      const memoriesDiv = document.querySelector('.memories');
-      memoriesDiv.innerHTML = '';
-      memories.forEach((memory) => {
-        const memoryDiv = document.createElement('div');
-        const memoryText = document.createElement('span');
-        const memoryResult = document.createElement('span');
-        memoryText.textContent = memory.text + " = ";
-        memoryResult.textContent = memory.result;
-        memoryDiv.appendChild(memoryText);
-        memoryDiv.appendChild(memoryResult);
-        memoriesDiv.appendChild(memoryDiv);
+    function paintMemories() {  // 기록을 표시하는 함수
+      let memories = window.localStorage.getItem('memories');  // 로컬 스토리지에서 기록 가져옴
+      memories = memories ? JSON.parse(memories) : [];  // 기록이 있으면 가져오고 없으면 빈 배열 생성
+      memories = memories.reverse();  // 기록을 역순으로 정렬
+      const memoriesDiv = document.querySelector('.memories');  // 기록 표시할 div 가져옴
+      memoriesDiv.innerHTML = '';  // 기록 초기화
+      memories.forEach((memory) => {  // 기록을 하나씩 가져와서
+        const memoryDiv = document.createElement('div');  // div 생성
+        const memoryText = document.createElement('span');  // span 생성
+        const memoryResult = document.createElement('span');  // span 생성
+        memoryText.textContent = memory.text + " = ";  // 기록 텍스트 설정
+        memoryResult.textContent = memory.result;  // 기록 결과 설정
+        memoryDiv.appendChild(memoryText);  // div에 텍스트 추가
+        memoryDiv.appendChild(memoryResult);  // div에 결과 추가
+        memoriesDiv.appendChild(memoryDiv);  // 기록 div에 추가
       });
     }
 
-    resultText.addEventListener('keydown', (e) => {
-      expression = resultText.value;
-      resultText.value = expression;
-      if (e.key === 'Enter') {
-        calculate();
+    resultText.addEventListener('keydown', (e) => {  // 결과창에 입력을 받아 식에 추가
+      expression = resultText.value;  // 결과창의 값을 식으로 설정
+      resultText.value = expression;  // 결과창에 식 표시
+      if (e.key === 'Enter') {  // Enter를 누르면
+        calculate();  // 계산
       }
     });
 
-    resultText.addEventListener('keyup', (e) => {
-      expression = resultText.value;
-      resultText.value = expression;
+    resultText.addEventListener('keyup', (e) => {  // 결과창에 입력을 받아 식에 추가
+      expression = resultText.value;  // 결과창의 값을 식으로 설정
+      resultText.value = expression;  // 결과창에 식 표시
     });
 
-    paintMemories();
+    paintMemories();  // 기록 표시
   </script>
 </body>
 
