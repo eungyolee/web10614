@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>행 추가</title>
+</head>
+<body>
+  <table border="1">
+    <tr>
+      <td>(1, 1) 셀</td>
+      <td>(1, 2) 셀</td>
+    </tr>
+    <tr>
+      <td>(2, 1) 셀</td>
+      <td>(2, 2) 셀</td>
+    </tr>
+  </table>
+  <button onclick="insert()">행 추가</button>
+  <script>
+    let idx = 3;
+    function insert() {
+      const table = document.querySelector('table');
+      const tr = table.insertRow(-1);
+      const td1 = tr.insertCell(0);
+      const td2 = tr.insertCell(1);
+      td1.textContent = `(${idx}, 1) 셀`;
+      td2.textContent = `(${idx}, 2) 셀`;
+      idx++;
+    }
+  </script>
+</body>
+</html>

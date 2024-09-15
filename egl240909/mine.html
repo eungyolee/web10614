@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <style>
+        * {
+            text-align: center;
+        }
+
+        #board {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #board tr td {
+            border: 1px solid white;
+            background: #34da79;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        #board tr td.clicked {
+            background: #6c5ee7;
+        }
+
+        #board tr td.doubt {
+            background: #FFFF00;
+        }
+
+        #board tr td.mine {
+            background: #FF0000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>지뢰찾기</h1>
+    <table id="board">
+    </table>
+    <BUTTON onclick="genGrid();">새로운 게임</BUTTON>
+    <script>
+        let grid = document.getElementById("board");
+        let rows = 10;
+        let cols = 10;
+        let firstClick = true;
+
+        function genGrid() {
+            grid.innerHTML = "";
+            for (let i = 0; i < rows; i++) {
+                let row = document.createElement("tr");
+                for (let j = 0; j < cols; j++) {
+                    let cell = document.createElement("td");
+                    cell.setAttribute("data-row", i);
+                    cell.setAttribute("data-col", j);
+                    cell.addEventListener("click", clickCell);
+                    cell.addEventListener("contextmenu", doubtCell);
+                    row.appendChild(cell);
+                }
+                grid.appendChild(row);
+            }
+            genMines();
+        }
+
+        function genMines() {
+            firstClick = true;
+            localStorage.removeItem("mines");
+            let mines = {};
+            for (let i = 0; i < 20; i++) {
+                let row = Math.floor(Math.random() * rows);
+                let col = Math.floor(Math.random() * cols);
+                let encryptioned_row = btoa(row.toString());
+                let encryptioned_col = btoa(col.toString());
+                if (mines[`${encryptioned_row}, ${encryptioned_col}`]) {
+                    i--;
+                    continue;
+                }
+                mines[`${encryptioned_row}, ${encryptioned_col}`] = true;
+            }
+            localStorage.setItem("mines", JSON.stringify(mines));
+        }
+
+        function doubtCell(e) {
+            e.preventDefault();
+            
+            e.target.classList.toggle("doubt");
+        }
+
+        function showMines(idx) {
+            let mines = JSON.parse(localStorage.getItem("mines"));
+            let mine = Object.keys(mines)[idx];
+            let row = atob(mine.split(",")[0]);
+            let col = atob(mine.split(",")[1]);
+            grid.querySelector(`[data-row="${row}"][data-col="${col}"]`).classList.add("mine");
+        }
+
+        function checkMine(row, col) {
+            let mines = JSON.parse(localStorage.getItem("mines"));
+            return mines[`${btoa(row)}, ${btoa(col)}`];
+        }
+
+        function clickCell(e) {
+            let row = e.target.getAttribute("data-row");
+            let col = e.target.getAttribute("data-col");
+            let mines = JSON.parse(localStorage.getItem("mines"));
+
+            if (firstClick) {
+                firstClick = false;
+                while (checkMine(row, col)) {
+                    genMines();
+                    checkMine(row, col);
+                }
+            }
+
+            if (checkMine(row, col)) {
+                for (let i = 0; i < Object.keys(mines).length; i++) {
+                    setTimeout(showMines, 100 * i, i);
+                }
+            } else {
+                e.target.classList.add("clicked");
+                let count = 0;
+                for (let i = -1; i <= 1; i++) {
+                    for (let j = -1; j <= 1; j++) {
+                        let r = parseInt(row) + i;
+                        let c = parseInt(col) + j;
+                        if (r >= 0 && r < rows && c >= 0 && c < cols) {
+                            if (mines[`${btoa(r)}, ${btoa(c)}`]) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+                e.target.innerText = count;
+            }
+
+            let clicked = document.querySelectorAll(".clicked").length;
+            let total = rows * cols;
+            if (clicked + Object.keys(mines).length === total) {
+                alert("게임 클리어!");
+            }
+        }
+    </script>
+</body>
+
+</html>
