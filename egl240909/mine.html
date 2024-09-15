@@ -3,23 +3,75 @@
 
 <head>
     <style>
-        * {
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
             text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            font-family: 'Pretendard-Regular', sans-serif;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 3rem;
+        }
+
+        button {
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
         }
 
         #board {
             margin-left: auto;
             margin-right: auto;
+            border-spacing: 10px;
         }
 
         #board tr td {
             border: 1px solid white;
-            background: #34da79;
+            background: #cccccc;
             width: 50px;
             height: 50px;
             text-align: center;
             color: white;
             font-size: 20px;
+            cursor: not-allowed;
+        }
+
+        #board tr td.not-clicked {
+            background: #34da79;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #board tr td.not-clicked:hover {
+            /* scale 1.1 */
+            transform: scale(1.1);
+            transition: transform 0.2s;
         }
 
         #board tr td.clicked {
@@ -32,6 +84,21 @@
 
         #board tr td.mine {
             background: #FF0000;
+            animation: explode 0.5s;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -39,14 +106,135 @@
 <body>
     <h1>지뢰찾기</h1>
     <table id="board">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
-    <BUTTON onclick="genGrid();">새로운 게임</BUTTON>
+    <button onclick="genGrid();">새로운 게임</button>
     <script>
         let grid = document.getElementById("board");
         let rows = 10;
         let cols = 10;
         let firstClick = true;
-
+        let flag = true;
+    
         function genGrid() {
             grid.innerHTML = "";
             for (let i = 0; i < rows; i++) {
@@ -57,6 +245,7 @@
                     cell.setAttribute("data-col", j);
                     cell.addEventListener("click", clickCell);
                     cell.addEventListener("contextmenu", doubtCell);
+                    cell.classList.add("not-clicked");
                     row.appendChild(cell);
                 }
                 grid.appendChild(row);
@@ -66,6 +255,7 @@
 
         function genMines() {
             firstClick = true;
+            flag = true;
             localStorage.removeItem("mines");
             let mines = {};
             for (let i = 0; i < 20; i++) {
@@ -84,8 +274,14 @@
 
         function doubtCell(e) {
             e.preventDefault();
-            
+
+            if (!flag) {
+                return;
+            }
+
             e.target.classList.toggle("doubt");
+
+            checkSuccessGame();
         }
 
         function showMines(idx) {
@@ -101,6 +297,37 @@
             return mines[`${btoa(row)}, ${btoa(col)}`];
         }
 
+        function checkAroundMines(row, col) {
+            let mines = JSON.parse(localStorage.getItem("mines"));
+            let count = 0;
+            let directions = [
+                [-1, -1], [-1, 0], [-1, 1],
+                [0, -1], [0, 1],
+                [1, -1], [1, 0], [1, 1]
+            ];
+
+            for (let [dx, dy] of directions) {
+                let ni = parseInt(row) + dx;
+                let nj = parseInt(col) + dy;
+                if (ni >= 0 && ni < rows && nj >= 0 && nj < cols && mines[`${btoa(ni)}, ${btoa(nj)}`]) {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        function checkSuccessGame() {
+            let clicked = document.querySelectorAll(".clicked").length;
+            let doubt = document.querySelectorAll(".doubt").length;
+            const MINE = Object.keys(JSON.parse(localStorage.getItem("mines"))).length;
+
+            if (clicked === rows * cols - MINE && doubt === MINE) {
+                alert("CLEAR!");
+                flag = false;
+            }
+        }
+
         function clickCell(e) {
             let row = e.target.getAttribute("data-row");
             let col = e.target.getAttribute("data-col");
@@ -114,32 +341,21 @@
                 }
             }
 
+            if (!flag) {
+                return;
+            }
+
             if (checkMine(row, col)) {
+                flag = false;
                 for (let i = 0; i < Object.keys(mines).length; i++) {
-                    setTimeout(showMines, 100 * i, i);
+                    let showingMines = setTimeout(showMines, 100 * i, i);
                 }
             } else {
                 e.target.classList.add("clicked");
-                let count = 0;
-                for (let i = -1; i <= 1; i++) {
-                    for (let j = -1; j <= 1; j++) {
-                        let r = parseInt(row) + i;
-                        let c = parseInt(col) + j;
-                        if (r >= 0 && r < rows && c >= 0 && c < cols) {
-                            if (mines[`${btoa(r)}, ${btoa(c)}`]) {
-                                count++;
-                            }
-                        }
-                    }
-                }
-                e.target.innerText = count;
+                e.target.innerText = checkAroundMines(row, col);
             }
 
-            let clicked = document.querySelectorAll(".clicked").length;
-            let total = rows * cols;
-            if (clicked + Object.keys(mines).length === total) {
-                alert("게임 클리어!");
-            }
+            checkSuccessGame();
         }
     </script>
 </body>
