@@ -21,6 +21,14 @@
             height: 100vh;
             width: 100%;
             font-family: 'Pretendard-Regular', sans-serif;
+            background: black;
+        }
+
+        main {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px rgba(200, 200, 200, 0.5);
         }
 
         h1 {
@@ -53,24 +61,27 @@
 
         #board tr td {
             border: 1px solid white;
-            background: #cccccc;
             width: 50px;
             height: 50px;
             text-align: center;
             color: white;
             font-size: 20px;
-            cursor: not-allowed;
-        }
-
-        #board tr td.not-clicked {
             background: #34da79;
             cursor: pointer;
             transition: transform 0.2s;
         }
 
-        #board tr td.not-clicked:hover {
-            /* scale 1.1 */
-            transform: scale(1.1);
+        #board tr td.disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #board tr td.disabled:hover {
+            transform: scale(1);
+        }
+
+        #board tr td:hover {
+            transform: scale(1.15);
             transition: transform 0.2s;
         }
 
@@ -85,6 +96,10 @@
         #board tr td.mine {
             background: #FF0000;
             animation: explode 0.5s;
+        }
+
+        #board tr td.mine:hover {
+            transform: scale(1);
         }
 
         @keyframes explode {
@@ -104,200 +119,98 @@
 </head>
 
 <body>
-    <h1>지뢰찾기</h1>
-    <table id="board">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    <button onclick="genGrid();">새로운 게임</button>
+    <main>
+        <h1>지뢰찾기</h1>
+        <table id="board"></table>
+    </main>
+    <button onclick="initializeGrid();">RESET</button>
     <script>
+        const ROWS = 10;
+        const COLS = 10;
+        const MINE_COUNT = 20;
+        
         let grid = document.getElementById("board");
-        let rows = 10;
-        let cols = 10;
         let firstClick = true;
-        let flag = true;
-    
-        function genGrid() {
+        let gameActive = true;
+
+        for (let i = 0; i < ROWS; i++) {
+            let row = document.createElement("tr");
+            for (let j = 0; j < COLS; j++) {
+                let cell = document.createElement("td");
+                cell.classList.add("disabled");
+                row.appendChild(cell);
+            }
+            grid.appendChild(row);
+        }
+        
+        function initializeGrid() {
             grid.innerHTML = "";
-            for (let i = 0; i < rows; i++) {
+            for (let i = 0; i < ROWS; i++) {
                 let row = document.createElement("tr");
-                for (let j = 0; j < cols; j++) {
+                for (let j = 0; j < COLS; j++) {
                     let cell = document.createElement("td");
                     cell.setAttribute("data-row", i);
                     cell.setAttribute("data-col", j);
-                    cell.addEventListener("click", clickCell);
-                    cell.addEventListener("contextmenu", doubtCell);
-                    cell.classList.add("not-clicked");
+                    cell.addEventListener("click", handleCellClick);
+                    cell.addEventListener("contextmenu", handleCellRightClick);
                     row.appendChild(cell);
                 }
                 grid.appendChild(row);
             }
-            genMines();
+            generateMines();
         }
-
-        function genMines() {
+        
+        function generateMines() {
             firstClick = true;
-            flag = true;
+            gameActive = true;
             localStorage.removeItem("mines");
             let mines = {};
-            for (let i = 0; i < 20; i++) {
-                let row = Math.floor(Math.random() * rows);
-                let col = Math.floor(Math.random() * cols);
-                let encryptioned_row = btoa(row.toString());
-                let encryptioned_col = btoa(col.toString());
-                if (mines[`${encryptioned_row}, ${encryptioned_col}`]) {
-                    i--;
-                    continue;
+            while (Object.keys(mines).length < MINE_COUNT) {
+                let row = Math.floor(Math.random() * ROWS);
+                let col = Math.floor(Math.random() * COLS);
+                let encodedRow = btoa(row.toString());
+                let encodedCol = btoa(col.toString());
+                if (!mines[`${encodedRow},${encodedCol}`]) {
+                    mines[`${encodedRow},${encodedCol}`] = true;
                 }
-                mines[`${encryptioned_row}, ${encryptioned_col}`] = true;
             }
             localStorage.setItem("mines", JSON.stringify(mines));
         }
-
-        function doubtCell(e) {
-            e.preventDefault();
-
-            if (!flag) {
-                return;
-            }
-
-            e.target.classList.toggle("doubt");
-
-            checkSuccessGame();
+        
+        function handleCellRightClick(event) {
+            event.preventDefault();
+            if (!gameActive) return;
+            event.target.classList.toggle("doubt");
+            checkGameStatus();
         }
-
-        function showMines(idx) {
-            let mines = JSON.parse(localStorage.getItem("mines"));
-            let mine = Object.keys(mines)[idx];
-            let row = atob(mine.split(",")[0]);
-            let col = atob(mine.split(",")[1]);
+        
+        function revealMine(row, col) {
             grid.querySelector(`[data-row="${row}"][data-col="${col}"]`).classList.add("mine");
         }
-
-        function checkMine(row, col) {
+        
+        function revealAllMines(excludeRow, excludeCol) {
             let mines = JSON.parse(localStorage.getItem("mines"));
-            return mines[`${btoa(row)}, ${btoa(col)}`];
+            let mineKeys = Object.keys(mines);
+            let delay = 0;
+        
+            for (let i = 0; i < mineKeys.length; i++) {
+                let [encodedRow, encodedCol] = mineKeys[i].split(",");
+                let row = atob(encodedRow);
+                let col = atob(encodedCol);
+        
+                if (row == excludeRow && col == excludeCol) continue;
+        
+                setTimeout(() => revealMine(row, col), delay);
+                delay += 100; // 0.1 seconds per mine
+            }
         }
-
-        function checkAroundMines(row, col) {
+        
+        function isMine(row, col) {
+            let mines = JSON.parse(localStorage.getItem("mines"));
+            return mines[`${btoa(row)},${btoa(col)}`];
+        }
+        
+        function countAdjacentMines(row, col) {
             let mines = JSON.parse(localStorage.getItem("mines"));
             let count = 0;
             let directions = [
@@ -305,57 +218,52 @@
                 [0, -1], [0, 1],
                 [1, -1], [1, 0], [1, 1]
             ];
-
+        
             for (let [dx, dy] of directions) {
                 let ni = parseInt(row) + dx;
                 let nj = parseInt(col) + dy;
-                if (ni >= 0 && ni < rows && nj >= 0 && nj < cols && mines[`${btoa(ni)}, ${btoa(nj)}`]) {
+                if (ni >= 0 && ni < ROWS && nj >= 0 && nj < COLS && mines[`${btoa(ni)},${btoa(nj)}`]) {
                     count++;
                 }
             }
-
+        
             return count;
         }
-
-        function checkSuccessGame() {
-            let clicked = document.querySelectorAll(".clicked").length;
-            let doubt = document.querySelectorAll(".doubt").length;
-            const MINE = Object.keys(JSON.parse(localStorage.getItem("mines"))).length;
-
-            if (clicked === rows * cols - MINE && doubt === MINE) {
+        
+        function checkGameStatus() {
+            let clickedCells = document.querySelectorAll(".clicked").length;
+            let doubtedCells = document.querySelectorAll(".doubt").length;
+            const totalMines = Object.keys(JSON.parse(localStorage.getItem("mines"))).length;
+        
+            if (clickedCells === ROWS * COLS - totalMines && doubtedCells === totalMines) {
                 alert("CLEAR!");
-                flag = false;
+                gameActive = false;
             }
         }
-
-        function clickCell(e) {
-            let row = e.target.getAttribute("data-row");
-            let col = e.target.getAttribute("data-col");
-            let mines = JSON.parse(localStorage.getItem("mines"));
-
+        
+        function handleCellClick(event) {
+            let row = event.target.getAttribute("data-row");
+            let col = event.target.getAttribute("data-col");
+        
             if (firstClick) {
                 firstClick = false;
-                while (checkMine(row, col)) {
-                    genMines();
-                    checkMine(row, col);
+                while (isMine(row, col)) {
+                    generateMines();
                 }
             }
-
-            if (!flag) {
-                return;
-            }
-
-            if (checkMine(row, col)) {
-                flag = false;
-                for (let i = 0; i < Object.keys(mines).length; i++) {
-                    let showingMines = setTimeout(showMines, 100 * i, i);
-                }
+        
+            if (!gameActive) return;
+        
+            if (isMine(row, col)) {
+                gameActive = false;
+                revealMine(row, col);
+                revealAllMines(row, col);
             } else {
-                e.target.classList.add("clicked");
-                e.target.innerText = checkAroundMines(row, col);
+                event.target.classList.add("clicked");
+                event.target.innerText = countAdjacentMines(row, col);
             }
-
-            checkSuccessGame();
+        
+            checkGameStatus();
         }
     </script>
 </body>
