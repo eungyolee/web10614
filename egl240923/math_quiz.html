@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script>
+        function cal() {
+            let answer = document.getElementById('answer').value;
+            let s = document.getElementById("problem").value;
+            let solution=eval(s);
+            if (answer == solution) {
+                alert("정답!");
+            } else {
+                alert("틀렸습니다! 정답은"+solution);
+            }
+        }
+    </script>
+</head>
+
+<body>
+        <h1>Math Quiz</h1>
+        <input type="text" id="problem" value="12*2+20-30"><br>
+        <input type="text" id="answer" >
+        <button  onclick="cal()">정답 알아보기</button>
+</body>

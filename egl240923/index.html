@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event</title>
+  <style>
+    #main {
+      width: 200px;
+      height: 50px;
+      background-color: #faea11;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    마우스를 올려주세요!
+  </div>
+  <script>
+    const main = document.getElementById('main');
+    main.addEventListener('mouseover', () => {
+      main.textContent = '감사합니다.';
+    });
+
+    main.addEventListener('mouseout', () => {
+      main.textContent = '마우스를 올려주세요!';
+    });
+  </script>
+</body>
+</html>
