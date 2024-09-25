@@ -260,7 +260,26 @@
                 revealAllMines(row, col);
             } else {
                 event.target.classList.add("clicked");
-                event.target.innerText = countAdjacentMines(row, col);
+                if (!countAdjacentMines(row, col)) {
+                    let directions = [
+                        [-1, -1], [-1, 0], [-1, 1],
+                        [0, -1], [0, 1],
+                        [1, -1], [1, 0], [1, 1]
+                    ];
+
+                    for (let [dx, dy] of directions) {
+                        let ni = parseInt(row) + dx;
+                        let nj = parseInt(col) + dy;
+                        if (ni >= 0 && ni < ROWS && nj >= 0 && nj < COLS) {
+                            let cell = grid.querySelector(`[data-row="${ni}"][data-col="${nj}"]`);
+                            if (!cell.classList.contains("clicked")) {
+                                cell.click();
+                            }
+                        }
+                    }
+                } else {
+                    event.target.textContent = countAdjacentMines(row, col);
+                }
             }
         
             checkGameStatus();
