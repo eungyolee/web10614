@@ -251,6 +251,8 @@
                     generateMines();
                 }
             }
+
+            if (event.target.classList.contains("clicked") || event.target.classList.contains("doubt")) return;
         
             if (!gameActive) return;
         
