@@ -235,7 +235,7 @@
             let doubtedCells = document.querySelectorAll(".doubt").length;
             const totalMines = Object.keys(JSON.parse(localStorage.getItem("mines"))).length;
         
-            if (clickedCells === ROWS * COLS - totalMines && doubtedCells === totalMines) {
+            if (clickedCells === ROWS * COLS - totalMines) {
                 alert("CLEAR!");
                 gameActive = false;
             }
