@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    @font-face {
+      font-family: 'Pretendard-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 10px;
+      font-family: 'Pretendard-Regular', sans-serif;
+    }
+
+    .my-canvas {
+      border: 1px solid red;
+      width: 300px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="my-canvas1" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas2" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas3" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas4" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas5" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas6" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas7" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas8" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas9" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas10" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas11" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas12" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas13" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas14" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas15" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas16" class="my-canvas" width="300" height="200"></canvas>
+  <canvas id="my-canvas17" class="my-canvas" width="300" height="200"></canvas>
+  <button onclick="clearDrawing()">화면 지우기</button>
+  <a href="https://eungyolee.kr/paintJS" target="_blank">옛날에 강의 보고 따라 만들었던 그림판 사이트 바로가기</a>
+  <script>
+    const canvas1 = document.getElementById("my-canvas1");
+    const canvas2 = document.getElementById("my-canvas2");
+    const canvas3 = document.getElementById("my-canvas3");
+    const canvas4 = document.getElementById("my-canvas4");
+    const canvas5 = document.getElementById("my-canvas5");
+    const canvas6 = document.getElementById("my-canvas6");
+    const canvas7 = document.getElementById("my-canvas7");
+    const canvas8 = document.getElementById("my-canvas8");
+    const canvas9 = document.getElementById("my-canvas9");
+    const canvas10 = document.getElementById("my-canvas10");
+    const canvas11 = document.getElementById("my-canvas11");
+    const canvas12 = document.getElementById("my-canvas12");
+    const canvas13 = document.getElementById("my-canvas13");
+    const canvas14 = document.getElementById("my-canvas14");
+    const canvas15 = document.getElementById("my-canvas15");
+    const canvas16 = document.getElementById("my-canvas16");
+    const canvas17 = document.getElementById("my-canvas17");
+    
+    let drawing = false;
+
+    function drawTriangle() {
+      let ctx1 = canvas1.getContext('2d');
+
+      ctx1.beginPath();
+      ctx1.moveTo(50, 30);
+      ctx1.lineTo(30, 100);
+      ctx1.lineTo(200, 100);
+      ctx1.fill();
+    }
+
+    function drawFace() {
+      let ctx2 = canvas2.getContext('2d');
+
+      ctx2.beginPath();
+      ctx2.arc(125, 100, 75, 0, Math.PI * 2, true);
+      ctx2.stroke()
+      ctx2.moveTo(105, 105);
+      ctx2.beginPath();
+      ctx2.arc(100, 90, 10, 0, Math.PI * 2, true);
+      ctx2.stroke();
+      ctx2.beginPath();
+      ctx2.arc(150, 90, 10, 0, Math.PI * 2, true);
+      ctx2.stroke();
+      ctx2.beginPath();
+      ctx2.arc(125, 125, 10, 0, Math.PI, false);
+      ctx2.stroke();
+    }
+
+    function drawTriangleAndStroke() {
+      let ctx3 = canvas3.getContext('2d');
+
+      ctx3.beginPath();
+      ctx3.moveTo(50, 30);
+      ctx3.lineTo(30, 100);
+      ctx3.lineTo(200, 100);
+      ctx3.fillStyle = "#FFFF00";
+      ctx3.fill();
+
+      ctx3.beginPath();
+      ctx3.moveTo(100, 30);
+      ctx3.lineTo(80, 100);
+      ctx3.lineTo(250, 100);
+      ctx3.closePath();
+      ctx3.strokeStyle = "#FF0000";
+      ctx3.stroke();
+    }
+
+    function drawCircleinCircle() {
+      let ctx4 = canvas4.getContext('2d');
+
+      ctx4.beginPath();
+      ctx4.arc(150, 100, 75, 0, 2 * Math.PI);
+      ctx4.strokeStyle = 'red';
+      ctx4.lineWidth = 2;
+      ctx4.stroke();
+      ctx4.beginPath();
+      ctx4.arc(150, 100, 50, 2 * Math.PI, 1.5 * Math.PI);
+      ctx4.closePath();
+      ctx4.strokeStyle = 'blue';
+      ctx4.lineWidth = 2;
+      ctx4.stroke();
+      ctx4.beginPath();
+      ctx4.arc(150, 100, 25, 2 * Math.PI, 1.5 * Math.PI);
+      ctx4.strokeStyle = 'green';
+      ctx4.lineWidth = 2;
+      ctx4.stroke();
+    }
+
+    function drawBezier() {
+      let ctx5 = canvas5.getContext('2d');
+
+      ctx5.beginPath();
+      ctx5.moveTo(50, 150);
+      ctx5.bezierCurveTo(100, 50, 200, 50, 200, 150);
+      ctx5.lineWidth = 10;
+      ctx5.stroke();
+    }
+
+    function drawRectAndStroke() {
+      let ctx6 = canvas6.getContext('2d');
+
+      ctx6.beginPath();
+      ctx6.rect(50, 50, 100, 100);
+      ctx6.fillStyle = "#FFFF00";
+      ctx6.fill();
+
+      ctx6.beginPath();
+      ctx6.rect(175, 50, 100, 100);
+      ctx6.stroke();
+    }
+
+    function writeItalicFont() {
+      let ctx7 = canvas7.getContext('2d');
+
+      ctx7.font = "italic 30px Arial";
+      ctx7.fillText("Hello World", 80, 100);
+    }
+
+    function fillImage() {
+      let ctx8 = canvas8.getContext('2d');
+      let img = new Image();
+      img.src = "https://eungyolee.kr/static/media/Profile-2023.1fb965f4589ae423785e.png";
+      img.onload = function() {
+        ctx8.drawImage(img, 50, 50, 100, 100);
+      }
+    }
+
+    function makeColorsTable() {
+      let ctx9 = canvas9.getContext('2d');
+      for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 10; j++) {
+          ctx9.fillStyle = `rgb(${Math.floor(225 - 10 * i)}, ${Math.floor(225 - 30 * j)}, 0)`;
+          ctx9.fillRect(j * 30, i * 30, 25, 25);
+        }
+      }
+    }
+
+    function drawStrokesThickerAndThicker() {
+      let ctx10 = canvas10.getContext('2d');
+      for (let i = 0; i < 10; i++) {
+        ctx10.beginPath();
+        ctx10.moveTo(30 * i + 10, 50);
+        ctx10.lineTo(30 * i + 10, 150);
+        ctx10.lineWidth = i + 2;
+        ctx10.stroke();
+      }
+    }
+
+    function drawRectWithLinearGradient() {
+      let ctx11 = canvas11.getContext('2d');
+      let grd = ctx11.createLinearGradient(0, 0, 100, 0);
+      grd.addColorStop(0, "white");
+      grd.addColorStop(1, "red");
+      ctx11.fillStyle = grd;
+      ctx11.fillRect(10, 10, 250, 100);
+    }
+
+    function drawRectWithRadialGradient() {
+      let ctx12 = canvas12.getContext('2d');
+      let grd = ctx12.createRadialGradient(50, 50, 10, 50, 50, 100);
+      grd.addColorStop(0, "white");
+      grd.addColorStop(1, "red");
+      ctx12.fillStyle = grd;
+      ctx12.fillRect(10, 10, 250, 100);
+    }
+
+    function fillImagesWithRepeat() {
+      let ctx13 = canvas13.getContext('2d');
+      let img = new Image();
+      img.src = "https://eungyolee.kr/static/media/Profile-2023.1fb965f4589ae423785e.png";
+      img.onload = function() {
+        for (let i = 0; i < 3; i++) {
+          ctx13.drawImage(img, 110 * i, 50, 100, 100);
+        }
+      }
+    }
+
+    function drawTwoRects() {
+      let ctx14 = canvas14.getContext('2d');
+      ctx14.beginPath();
+      ctx14.rect(50, 25, 100, 100);
+      ctx14.fillStyle = 'blue';
+      ctx14.fill();
+
+      ctx14.beginPath();
+      ctx14.rect(100, 75, 100, 100);
+      ctx14.fillStyle = 'red';
+      ctx14.fill();
+    }
+
+    function drawTwoRectsButRedOneIsDiamond() {
+      let ctx15 = canvas15.getContext('2d');
+      ctx15.beginPath();
+      ctx15.rect(0, 0, 100, 100);
+      ctx15.fillStyle = 'blue';
+      ctx15.fill();
+
+      ctx15.beginPath();
+      ctx15.translate(50, 50);
+      ctx15.rotate(Math.PI / 4);
+      ctx15.rect(0, 0, 100, 100);
+      ctx15.fillStyle = 'red';
+      ctx15.fill();
+    }
+
+    function drawTwoRectsButRedOneIsInBlueOne() {
+      let ctx16 = canvas16.getContext('2d');
+      ctx16.beginPath();
+      ctx16.rect(50, 25, 100, 100);
+      ctx16.fillStyle = 'blue';
+      ctx16.fill();
+
+      ctx16.beginPath();
+      ctx16.rect(100, 75, 50, 50);
+      ctx16.fillStyle = 'red';
+      ctx16.fill();
+    }
+
+    let ctx17 = canvas17.getContext('2d');
+    function onMouseMove(event) {
+      const x = event.clientX - canvas17.getBoundingClientRect().left;
+      const y = event.clientY - canvas17.getBoundingClientRect().top;
+      if (drawing) {
+        ctx17.lineTo(x, y);
+        ctx17.stroke();
+      } else {
+        ctx17.beginPath();
+        ctx17.moveTo(x, y);
+      }
+    }
+
+    function stopDrawing() {
+      drawing = false;
+    }
+
+    function clearDrawing() {
+      ctx17.clearRect(0, 0, canvas17.width, canvas17.height);
+      ctx17.beginPath();
+    }
+
+    function startDrawing() {
+      drawing = true;
+    }
+    
+    canvas17.addEventListener('mousemove', onMouseMove);
+    canvas17.addEventListener('mousedown', startDrawing);
+    canvas17.addEventListener('mouseup', stopDrawing);
+
+    function init() {
+      drawTriangle();
+      drawFace();
+      drawTriangleAndStroke();
+      drawCircleinCircle();
+      drawBezier();
+      drawRectAndStroke();
+      writeItalicFont();
+      fillImage();
+      makeColorsTable();
+      drawStrokesThickerAndThicker();
+      drawRectWithLinearGradient();
+      drawRectWithRadialGradient();
+      fillImagesWithRepeat();
+      drawTwoRects();
+      drawTwoRectsButRedOneIsDiamond();
+      drawTwoRectsButRedOneIsInBlueOne();
+    };
+
+    init();
+  </script>
+</body>
+</html>
