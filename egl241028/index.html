@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height="500" style="border: 1px solid black; background-color: yellow;"></canvas>
+	<button onClick="changeSpeed();">속도 바꾸기</button>
+	<script>
+		const CANVAS_SIZE = document.getElementById('myCanvas').width;
+		const CIRCLE_RADIUS = 50;
+
+		let context;
+		let dx = getRandomSpeed();
+		let dy = getRandomSpeed();
+		let y = CANVAS_SIZE / 2;
+		let x = CANVAS_SIZE / 2;
+
+		function draw() {
+			const canvas = document.getElementById('myCanvas');
+			const context = canvas.getContext('2d');
+
+			context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+			context.beginPath();
+			context.fillStyle = "red";
+			context.arc(x, y, CIRCLE_RADIUS, 0, Math.PI * 2);
+			context.closePath();
+			context.fill();
+
+			if (x < CIRCLE_RADIUS || x > (CANVAS_SIZE - CIRCLE_RADIUS)) {
+				dx = -dx;
+			}
+			if (y < CIRCLE_RADIUS || y > (CANVAS_SIZE - CIRCLE_RADIUS)) { 
+				dy = -dy;
+			}
+			x += dx;
+			y += dy;
+		}
+
+		function changeSpeed() {
+			dx = getRandomSpeed();
+			dy = getRandomSpeed();
+		}
+
+		function getRandomSpeed() {
+			return Math.floor(Math.random() * 5) + 1;
+		}
+
+		setInterval(draw, 10);
+	</script>
+</body>
+</html>

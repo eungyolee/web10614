@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Game</title>
+    <style>
+        canvas {
+            border: 1px dotted red;
+            background-color: #fcff00;
+        }
+    </style>
+</head>
+<body onload="init();">
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <div id="control">
+        <label for="velocity">속도</label>
+        <input id="velocity" value="30" type="range" min="0" max="100" step="1" />
+        <span id="velocity-value">30</span>
+        <label for="angle">각도</label>
+        <input id="angle" value="45" type="range" min="0" max="90" step="1" />
+        <span id="angle-value">45</span>
+        <div id="score">점수 = 0</div>
+        <button onclick="start()">발사</button>
+    </div>
+    <script>
+        let context, velocity, angle, ballVx, ballVy, timer;
+        const ballRadius = 10;
+        const ballInitialX = 40;
+        const ballInitialY = 250;
+        let ballX = ballInitialX;
+        let ballY = ballInitialY;
+        let score = 0;
+        const image = new Image();
+        image.src = "lawn.png";
+        const backimage = new Image();
+        backimage.src = "goal.png";
+
+        function init() {
+            context = document.getElementById('canvas').getContext('2d');
+            setupEventListeners();
+            velocity = Number(document.getElementById("velocity").value);
+            angle = Number(document.getElementById("angle").value);
+            resetBall();
+            draw();
+        }
+
+        function setupEventListeners() {
+            document.getElementById("velocity").oninput = updateVelocity;
+            document.getElementById("angle").oninput = updateAngle;
+        }
+
+        function updateVelocity() {
+            document.getElementById("velocity-value").innerText = this.value;
+            velocity = Number(this.value);
+            draw();
+        }
+
+        function updateAngle() {
+            document.getElementById("angle-value").innerText = this.value;
+            angle = Number(this.value);
+            draw();
+        }
+
+        function resetBall() {
+            ballX = ballInitialX;
+            ballY = ballInitialY;
+        }
+
+        function draw() {
+            context.clearRect(0, 0, 500, 300);
+            drawBall();
+            drawBackground();
+            drawTrajectory();
+        }
+
+        function drawBall() {
+            context.beginPath();
+            context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fillStyle = "red";
+            context.fill();
+            ballBounce();
+        }
+
+        function drawBackground() {
+            context.drawImage(image, 0, 270);
+            context.drawImage(backimage, 380, 50);
+            context.font = "20px Arial";
+            context.fillStyle = "black";
+            context.fillText("배경 바꾸기 귀찮다~", 100, 40);
+            context.fillText("나 너무 못 만들었는데", 100, 70);
+            context.fillText("왕렬쌤 사랑해요", 100, 100);
+        }
+
+        function drawTrajectory() {
+            angle = Number(document.getElementById("angle").value);
+            velocity = Number(document.getElementById("velocity").value);
+
+            context.beginPath();
+            context.moveTo(ballInitialX, ballInitialY);
+            let tempX = ballInitialX;
+            let tempY = ballInitialY;
+            let tempVx = velocity * Math.cos(angle * Math.PI / 180);
+            let tempVy = -velocity * Math.sin(angle * Math.PI / 180);
+            while (tempX < 500) {
+                tempVy += 0.98;
+                tempX += tempVx * 0.5;
+                tempY += tempVy * 0.5;
+                context.lineTo(tempX, tempY);
+            }
+            context.strokeStyle = "blue";
+            context.setLineDash([5, 5]);
+            context.stroke();
+        }
+
+        function start() {
+            if (timer) {
+                clearInterval(timer);
+            }
+            resetBall();
+            velocity = Number(document.getElementById("velocity").value);
+            angle = Number(document.getElementById("angle").value);
+            const angleR = angle * Math.PI / 180;
+
+            ballVx = velocity * Math.cos(angleR);
+            ballVy = -velocity * Math.sin(angleR);
+
+            draw();
+            timer = setInterval(calculate, 10);
+        }
+
+        function calculate() {
+            ballVy += 0.98;
+            ballX += ballVx * 0.5;
+            ballY += ballVy * 0.5;
+
+            if (isBallInGoal()) {
+                score++;
+                updateScore();
+                clearInterval(timer);
+                resetBall();
+            }
+            if (ballY > 295) {
+                clearInterval(timer);
+                resetBall();
+            }
+
+            draw();
+        }
+
+        function isBallInGoal() {
+            return ballX >= 380 && ballX <= 480 && ballY >= 50 && ballY <= 124;
+        }
+
+        function updateScore() {
+            document.getElementById("score").innerText = "점수 = " + score;
+        }
+
+        function ballBounce() {
+            if (ballY > 290) {
+                ballVy = -ballVy;
+            }
+        }
+    </script>
+</body>
+</html>
