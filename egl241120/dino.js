@@ -44,9 +44,12 @@ class Dino {
     }
 
     Jump() {
+        // 점프와 웅크리기를 동시에 하면 점프 무시
+        // 점프 중에 점프 키를 한 번 더 누르면 더블 점프
         if ((keys['ShiftLeft'] || keys['ArrowDown'])) {
             return;
         }
+        // etc...
         if (this.grounded && this.jumpTimer == 0) {
             this.jumpTimer = 1;
             this.dy = -this.jumpForce;
@@ -70,7 +73,7 @@ class Dino {
         }
 
         if (keys['ShiftLeft'] || keys['ArrowDown']) {
-            if (this.isJumping && this.dy > 0) {
+            if (this.isJumping && this.dy > 0) {  // 만약 점프 중에 웅크리면 즉시 떨어진다.
                 this.dy += 5;
             }
             this.h = this.originalHeight / 2;
